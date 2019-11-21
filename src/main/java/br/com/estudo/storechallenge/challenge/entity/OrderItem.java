@@ -7,6 +7,8 @@ import lombok.Data;
 //@Entity
 public class OrderItem {
 
+    private Long id;
+
     private String description;
 
     private Double unitPrice;

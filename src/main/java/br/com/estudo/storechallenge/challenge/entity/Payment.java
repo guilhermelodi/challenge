@@ -9,6 +9,8 @@ import java.util.Date;
 //@Entity
 public class Payment {
 
+    private Long id;
+
     private Integer creditCardNumber;
 
     // TODO: verificar com o Uri a utilização do LocalDate
