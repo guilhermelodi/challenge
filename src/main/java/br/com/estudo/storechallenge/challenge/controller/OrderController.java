@@ -2,6 +2,8 @@ package br.com.estudo.storechallenge.challenge.controller;
 
 import br.com.estudo.storechallenge.challenge.entity.Order;
 import br.com.estudo.storechallenge.challenge.service.OrderService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +15,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("orders")
+@Api(value = "Order", tags = "Order")
 public class OrderController {
 
     @Autowired
     private OrderService service;
 
     @GetMapping
+    @ApiOperation(value = "Lists all orders")
     public ResponseEntity<List<Order>> listAllOrders() {
         return new ResponseEntity<>(service.listAllOrders(), HttpStatus.OK);
     }
