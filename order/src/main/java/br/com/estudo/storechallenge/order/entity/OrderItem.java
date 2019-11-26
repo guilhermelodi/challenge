@@ -1,4 +1,4 @@
-package br.com.estudo.storechallenge.store.entity;
+package br.com.estudo.storechallenge.order.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

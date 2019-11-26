@@ -1,10 +1,10 @@
-package br.com.estudo.storechallenge.store;
+package br.com.estudo.storechallenge.order;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChallengeApplicationTests {
+class OrderApplicationTests {
 
 	@Test
 	void contextLoads() {

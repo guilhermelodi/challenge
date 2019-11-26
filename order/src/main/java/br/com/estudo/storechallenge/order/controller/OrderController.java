@@ -1,7 +1,7 @@
-package br.com.estudo.storechallenge.store.controller;
+package br.com.estudo.storechallenge.order.controller;
 
-import br.com.estudo.storechallenge.store.entity.Order;
-import br.com.estudo.storechallenge.store.service.OrderService;
+import br.com.estudo.storechallenge.order.entity.Order;
+import br.com.estudo.storechallenge.order.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

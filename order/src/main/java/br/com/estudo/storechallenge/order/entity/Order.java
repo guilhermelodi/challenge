@@ -1,4 +1,4 @@
-package br.com.estudo.storechallenge.store.entity;
+package br.com.estudo.storechallenge.order.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
@@ -17,10 +17,8 @@ public class Order {
     @Id
     private Long id;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+    @Column(name = "store_id")
+    private Long storeId;
 
     @Column(name = "\"user\"")
     private String user;
@@ -37,9 +35,8 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> items;
 
-    @OneToOne
-    @JoinColumn(name = "payment_id", nullable=true)
-    private Payment payment;
+    @Column(name = "payment_id")
+    private Long paymentId;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "creation_date")
