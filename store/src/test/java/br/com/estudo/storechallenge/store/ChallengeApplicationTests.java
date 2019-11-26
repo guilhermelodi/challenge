@@ -1,4 +1,4 @@
-package br.com.estudo.storechallenge.challenge;
+package br.com.estudo.storechallenge.store;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

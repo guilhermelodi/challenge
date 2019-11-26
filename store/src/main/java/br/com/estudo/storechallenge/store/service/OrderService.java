@@ -1,6 +1,6 @@
-package br.com.estudo.storechallenge.challenge.service;
+package br.com.estudo.storechallenge.store.service;
 
-import br.com.estudo.storechallenge.challenge.entity.Order;
+import br.com.estudo.storechallenge.store.entity.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

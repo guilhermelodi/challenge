@@ -1,4 +1,4 @@
-package br.com.estudo.storechallenge.challenge.entity;
+package br.com.estudo.storechallenge.store.entity;
 
 import lombok.Builder;
 import lombok.Data;

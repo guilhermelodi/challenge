@@ -1,4 +1,4 @@
-package br.com.estudo.storechallenge.challenge;
+package br.com.estudo.storechallenge.store;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

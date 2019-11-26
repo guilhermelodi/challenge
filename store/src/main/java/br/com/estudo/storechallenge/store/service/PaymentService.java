@@ -1,4 +1,4 @@
-package br.com.estudo.storechallenge.challenge.service;
+package br.com.estudo.storechallenge.store.service;
 
 import org.springframework.stereotype.Service;
 
