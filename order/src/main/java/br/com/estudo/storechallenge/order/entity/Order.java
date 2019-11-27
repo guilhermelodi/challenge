@@ -1,6 +1,7 @@
 package br.com.estudo.storechallenge.order.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.com.estudo.storechallenge.order.response.StoreResponse;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Builder
+@AllArgsConstructor
 @Table(name = "\"order\"")
 public class Order {
 

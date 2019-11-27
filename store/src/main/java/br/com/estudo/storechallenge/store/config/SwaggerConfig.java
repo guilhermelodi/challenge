@@ -20,7 +20,7 @@ public class SwaggerConfig {
     public Docket greetingApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("br.com.estudo.storechallenge.challenge.controller"))
+                .apis(RequestHandlerSelectors.basePackage("br.com.estudo.storechallenge.store.controller"))
                 .build()
                 .apiInfo(metaData());
     }

@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -19,9 +18,6 @@ public class Store {
     private String name;
 
     private String address;
-
-    @OneToMany(mappedBy = "store")
-    private List<Order> orders;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "creation_date")

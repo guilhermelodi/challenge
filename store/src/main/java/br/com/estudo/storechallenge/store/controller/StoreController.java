@@ -40,4 +40,5 @@ public class StoreController {
 
         return new ResponseEntity<>(optionalStore.get(), HttpStatus.OK);
     }
+
 }

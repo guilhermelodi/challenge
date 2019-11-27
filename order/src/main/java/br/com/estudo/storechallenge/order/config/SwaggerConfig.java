@@ -27,8 +27,8 @@ public class SwaggerConfig {
 
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("Store REST API")
-                .description("\"Store REST API for study!\"")
+                .title("Order REST API")
+                .description("\"Order REST API for study!\"")
                 .version("1.0.0")
                 .build();
     }
