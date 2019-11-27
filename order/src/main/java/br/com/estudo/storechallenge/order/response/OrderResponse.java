@@ -30,10 +30,6 @@ public class OrderResponse {
 
     private Long paymentId;
 
-    private LocalDateTime creationDate;
-
-    private LocalDateTime updateDate;
-
 
     public static OrderResponse fromEntity(Order order) {
         return OrderResponse.builder()
@@ -44,8 +40,6 @@ public class OrderResponse {
                 .status(order.getStatus())
                 .items(order.getItems())
                 .paymentId(order.getPaymentId())
-                .creationDate(order.getCreationDate())
-                .updateDate(order.getUpdateDate())
                 .build();
     }
 
