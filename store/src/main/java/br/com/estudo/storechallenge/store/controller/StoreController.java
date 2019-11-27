@@ -1,7 +1,6 @@
 package br.com.estudo.storechallenge.store.controller;
 
 import br.com.estudo.storechallenge.store.entity.Store;
-import br.com.estudo.storechallenge.store.exception.StoreNotFoundException;
 import br.com.estudo.storechallenge.store.service.StoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("stores")
