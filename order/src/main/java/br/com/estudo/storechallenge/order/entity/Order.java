@@ -1,13 +1,12 @@
 package br.com.estudo.storechallenge.order.entity;
 
-import br.com.estudo.storechallenge.order.response.StoreResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -29,9 +28,8 @@ public class Order {
 
     private String address;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "confirmation_date")
-    private Date confirmationDate;
+    private LocalDateTime confirmationDate;
 
     // TODO: criar enum StatusOrder
     private Integer status;
@@ -42,12 +40,10 @@ public class Order {
     @Column(name = "payment_id")
     private Long paymentId;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "creation_date")
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "update_date")
-    private Date updateDate;
+    private LocalDateTime updateDate;
 
 }

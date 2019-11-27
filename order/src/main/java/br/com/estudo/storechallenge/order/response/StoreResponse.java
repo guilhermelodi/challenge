@@ -1,26 +1,25 @@
 package br.com.estudo.storechallenge.order.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "Store")
+@JsonInclude(Include.NON_NULL)
 public class StoreResponse {
 
     private Long id;
 
     private String name;
 
-    @JsonIgnore
-    private String address;
-
-    @JsonIgnore
-    private Date creationDate;
-
-    @JsonIgnore
-    private Date updateDate;
+    private String description;
 
 }

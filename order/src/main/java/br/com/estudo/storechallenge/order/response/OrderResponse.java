@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -22,7 +22,7 @@ public class OrderResponse {
 
     private String address;
 
-    private Date confirmationDate;
+    private LocalDateTime confirmationDate;
 
     private Integer status;
 
@@ -30,9 +30,9 @@ public class OrderResponse {
 
     private Long paymentId;
 
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
-    private Date updateDate;
+    private LocalDateTime updateDate;
 
 
     public static OrderResponse fromEntity(Order order) {

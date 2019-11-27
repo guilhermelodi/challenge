@@ -1,6 +1,7 @@
 package br.com.estudo.storechallenge.store.controller;
 
 import br.com.estudo.storechallenge.store.entity.Store;
+import br.com.estudo.storechallenge.store.exception.StoreNotFoundException;
 import br.com.estudo.storechallenge.store.service.StoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,23 +23,20 @@ import java.util.Optional;
 public class StoreController {
 
     @Autowired
-    private StoreService service;
+    private StoreService storeService;
 
     @ApiOperation(value = "Lists all stores")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Store>> listAllStores() {
-        return new ResponseEntity<>(service.listAllStores(), HttpStatus.OK);
+        return new ResponseEntity<>(storeService.listAllStores(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Gets one store by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Store> findStoreById(@PathVariable Long id) {
-        Optional<Store> optionalStore = service.findStoreById(id);
-        if (!optionalStore.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        Store store = storeService.findStoreById(id);
 
-        return new ResponseEntity<>(optionalStore.get(), HttpStatus.OK);
+        return new ResponseEntity<>(store, HttpStatus.OK);
     }
 
 }

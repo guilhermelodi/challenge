@@ -1,6 +1,7 @@
 package br.com.estudo.storechallenge.store.service;
 
-import br.com.estudo.storechallenge.store.dao.StoreDAO;
+import br.com.estudo.storechallenge.store.exception.StoreNotFoundException;
+import br.com.estudo.storechallenge.store.repository.StoreRepository;
 import br.com.estudo.storechallenge.store.entity.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,15 @@ import java.util.Optional;
 public class StoreService {
 
     @Autowired
-    private StoreDAO dao;
+    private StoreRepository storeRepository;
 
     public List<Store> listAllStores() {
-        return dao.findAll();
+        return storeRepository.findAll();
     }
 
-    public Optional<Store> findStoreById(Long id) {
-        return dao.findById(id);
+    public Store findStoreById(Long id) {
+        return storeRepository.findById(id)
+                .orElseThrow(StoreNotFoundException::new);
     }
 
 }

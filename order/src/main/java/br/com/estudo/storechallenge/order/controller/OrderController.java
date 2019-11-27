@@ -21,18 +21,18 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    private OrderService service;
+    private OrderService orderService;
 
     @GetMapping(value = "orders")
     @ApiOperation(value = "Lists all orders")
     public ResponseEntity<List<OrderResponse>> listAllOrders() {
-        return new ResponseEntity<>(service.listAllOrders(), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.listAllOrders(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Gets one order by user")
     @GetMapping(value = "users/{user}/orders", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OrderResponse>> findOrdersByUser(@PathVariable String user) {
-        return new ResponseEntity<>(service.listOrdersByUser(user), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.listOrdersByUser(user), HttpStatus.OK);
     }
 
 }
