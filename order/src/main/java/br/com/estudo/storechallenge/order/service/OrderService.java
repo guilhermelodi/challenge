@@ -1,18 +1,19 @@
 package br.com.estudo.storechallenge.order.service;
 
 import br.com.estudo.storechallenge.order.client.StoreClient;
-import br.com.estudo.storechallenge.order.repository.OrderRepository;
 import br.com.estudo.storechallenge.order.entity.Order;
+import br.com.estudo.storechallenge.order.repository.OrderRepository;
 import br.com.estudo.storechallenge.order.response.OrderResponse;
 import br.com.estudo.storechallenge.order.response.StoreResponse;
 import feign.FeignException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class OrderService {
 
@@ -23,6 +24,8 @@ public class OrderService {
     private StoreClient storeClient;
 
     public List<OrderResponse> listAllOrders() {
+        log.info("Listing all orders");
+
         List<Order> orders = orderRepository.findAll();
 
         return orders.stream()
@@ -38,6 +41,8 @@ public class OrderService {
     }
 
     public List<OrderResponse> listOrdersByUser(String user) {
+        log.info("Listing orders by user: {}", user);
+
         List<Order> orders = orderRepository.findByUser(user);
 
         return orders.stream()
