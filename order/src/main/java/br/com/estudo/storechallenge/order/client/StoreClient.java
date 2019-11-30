@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface StoreClient {
 
     @GetMapping("{id}")
-    @Cacheable("stores")
+    @Cacheable(cacheNames = "storesCache", key = "#id")
     StoreResponse findStoreById(@PathVariable("id") Long id);
 
 }
