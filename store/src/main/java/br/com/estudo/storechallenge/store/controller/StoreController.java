@@ -1,6 +1,8 @@
 package br.com.estudo.storechallenge.store.controller;
 
 import br.com.estudo.storechallenge.store.entity.Store;
+import br.com.estudo.storechallenge.store.request.AddStoreRequest;
+import br.com.estudo.storechallenge.store.request.UpdateStoreRequest;
 import br.com.estudo.storechallenge.store.service.StoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,4 +36,27 @@ public class StoreController {
         return new ResponseEntity<>(store, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Add a new store")
+    @PostMapping
+    public ResponseEntity<?> addStore(@RequestBody AddStoreRequest addStoreRequest) {
+        storeService.add(addStoreRequest);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "Update an existing store")
+    @PutMapping
+    public ResponseEntity<?> updateStore(@RequestBody UpdateStoreRequest updateStoreRequest) {
+        storeService.update(updateStoreRequest);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Delete a store")
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteStore(@PathVariable Long id) {
+        storeService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
