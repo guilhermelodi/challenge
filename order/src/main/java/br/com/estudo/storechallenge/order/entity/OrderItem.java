@@ -2,6 +2,8 @@ package br.com.estudo.storechallenge.order.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -12,7 +14,6 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "order_item")
-@EntityListeners(AuditingEntityListener.class)
 public class OrderItem {
 
     @Id
@@ -30,11 +31,11 @@ public class OrderItem {
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
