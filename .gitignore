@@ -7,6 +7,8 @@
 
 # User-specific stuff
 .idea/
+.directory
+*.iml
 
 # CMake
 cmake-build-*/
@@ -67,4 +69,5 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 .flattened-pom.xml
 
-# End of https://www.gitignore.io/api/java,maven,intellij
+# Ehcache
+**/spring-boot-ehcache/

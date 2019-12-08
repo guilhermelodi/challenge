@@ -8,13 +8,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "Store")
 @JsonInclude(Include.NON_NULL)
-public class StoreResponse {
+public class StoreResponse implements Serializable {
+
+    private static final long serialVersionUID = -7893943746237727890L;
+
 
     private Long id;
 

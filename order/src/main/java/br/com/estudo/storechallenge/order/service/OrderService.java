@@ -32,7 +32,7 @@ public class OrderService {
                 .map(o -> {
                     OrderResponse orderResponse = OrderResponse.fromEntity(o);
 
-                    StoreResponse storeResponse = findStoreById(o.getId());
+                    StoreResponse storeResponse = findStoreById(o.getStoreId());
                     orderResponse.setStore(storeResponse);
 
                     return orderResponse;
