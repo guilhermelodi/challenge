@@ -1,8 +1,7 @@
 package br.com.estudo.storechallenge.store.controller;
 
 import br.com.estudo.storechallenge.store.entity.Store;
-import br.com.estudo.storechallenge.store.request.AddStoreRequest;
-import br.com.estudo.storechallenge.store.request.UpdateStoreRequest;
+import br.com.estudo.storechallenge.store.request.StoreRequest;
 import br.com.estudo.storechallenge.store.service.StoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -37,26 +39,31 @@ public class StoreController {
     }
 
     @ApiOperation(value = "Add a new store")
-    @PostMapping
-    public ResponseEntity<?> addStore(@RequestBody AddStoreRequest addStoreRequest) {
-        storeService.add(addStoreRequest);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> addStore(@Valid @RequestBody StoreRequest storeRequest) {
+        Store store = storeService.add(storeRequest);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(store.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     @ApiOperation(value = "Update an existing store")
-    @PutMapping
-    public ResponseEntity<?> updateStore(@RequestBody UpdateStoreRequest updateStoreRequest) {
-        storeService.update(updateStoreRequest);
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateStore(@PathVariable Long id, @Valid @RequestBody StoreRequest storeRequest) {
+        Store store = storeService.update(id, storeRequest);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Delete a store")
     @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Delete a store")
     public ResponseEntity<?> deleteStore(@PathVariable Long id) {
         storeService.delete(id);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

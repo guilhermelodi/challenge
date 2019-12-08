@@ -3,12 +3,12 @@ package br.com.estudo.storechallenge.store.service;
 import br.com.estudo.storechallenge.store.entity.Store;
 import br.com.estudo.storechallenge.store.exception.StoreNotFoundException;
 import br.com.estudo.storechallenge.store.repository.StoreRepository;
-import br.com.estudo.storechallenge.store.request.AddStoreRequest;
-import br.com.estudo.storechallenge.store.request.UpdateStoreRequest;
+import br.com.estudo.storechallenge.store.request.StoreRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -31,32 +31,22 @@ public class StoreService {
                 .orElseThrow(StoreNotFoundException::new);
     }
 
-    public void add(AddStoreRequest addStoreRequest) {
-        log.info("Adding new store. Name: {}", addStoreRequest.getName());
+    public Store add(StoreRequest storeRequest) {
+        log.info("Adding new store. Name: {}", storeRequest.getName());
 
         Store store = new Store();
+        store.copyFromRequest(storeRequest);
 
-        // Nesta parte, eu pensei em fazer algo na Entity, tipo uma função:
-        // copyFromRequest que transferia os dados para a Entity antes de salvar...
-        // Já estou com o link do Dev Cave MapStruct para implementar no projeto
-        store.setName(addStoreRequest.getName());
-        store.setAddress(addStoreRequest.getAddress());
-
-        storeRepository.save(store);
+        return storeRepository.save(store);
     }
 
-    public void update(UpdateStoreRequest updateStoreRequest) {
-        log.info("Updating store by ID: {}", updateStoreRequest.getId());
+    public Store update(Long id, StoreRequest storeRequest) {
+        log.info("Updating store by ID: {}", id);
 
-        Store store = findStoreById(updateStoreRequest.getId());
+        Store store = findStoreById(id);
+        store.copyFromRequest(storeRequest);
 
-        // Nesta parte, eu pensei em fazer algo na Entity, tipo uma função:
-        // copyFromRequest que transferia os dados para a Entity antes de salvar...
-        // Já estou com o link do Dev Cave MapStruct para implementar no projeto
-        store.setName(updateStoreRequest.getName());
-        store.setAddress(updateStoreRequest.getAddress());
-
-        storeRepository.save(store);
+        return storeRepository.save(store);
     }
 
     public void delete(Long id) {

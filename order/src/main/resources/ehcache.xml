@@ -11,7 +11,7 @@
     <!-- Default cache template -->
     <cache-template name="default">
         <expiry>
-            <ttl unit="seconds">10</ttl>
+            <ttl unit="minutes">15</ttl>
         </expiry>
         <listeners>
             <listener>
