@@ -5,6 +5,7 @@ import br.com.estudo.storechallenge.order.entity.Order;
 import br.com.estudo.storechallenge.order.repository.OrderRepository;
 import br.com.estudo.storechallenge.order.response.OrderResponse;
 import br.com.estudo.storechallenge.order.response.StoreResponse;
+import br.com.estudo.storechallenge.order.response.StoreTotalSalesResponse;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,18 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    public StoreTotalSalesResponse findTotalSalesByStoreId(Long storeId) {
+        log.info("Calculating the total sales to store: {}", storeId);
+
+        StoreTotalSalesResponse storeTotalSalesResponse = StoreTotalSalesResponse.builder()
+                .storeId(storeId)
+                .totalDay(orderRepository.sumTotalSalesDayByStoreId(storeId))
+                .totalMonth(orderRepository.sumTotalSalesMonthByStoreId(storeId))
+                .build();
+
+        return storeTotalSalesResponse;
+    }
+
     private StoreResponse findStoreById(Long id) {
         try {
             return storeClient.findStoreById(id);
@@ -75,5 +88,4 @@ public class OrderService {
             return null;
         }
     }
-
 }
