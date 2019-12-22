@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,8 +64,8 @@ public class OrderService {
 
         StoreTotalSalesResponse storeTotalSalesResponse = StoreTotalSalesResponse.builder()
                 .storeId(storeId)
-                .totalDay(orderRepository.sumTotalSalesDayByStoreId(storeId))
-                .totalMonth(orderRepository.sumTotalSalesMonthByStoreId(storeId))
+                .totalDay(orderRepository.sumTotalSalesDayByStoreId(storeId).orElse(new BigDecimal("0")))
+                .totalMonth(orderRepository.sumTotalSalesMonthByStoreId(storeId).orElse(new BigDecimal("0")))
                 .build();
 
         return storeTotalSalesResponse;
