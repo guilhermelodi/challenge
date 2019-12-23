@@ -1,5 +1,6 @@
 package br.com.estudo.storechallenge.store.response;
 
+import br.com.estudo.storechallenge.store.entity.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +14,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class StoreTotalSalesResponse {
 
-    private Long id;
-
-    private String name;
-
-    private String address;
+    private Store store;
 
     private BigDecimal totalDay;
 

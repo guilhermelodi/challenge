@@ -64,11 +64,9 @@ public class StoreService {
         log.info("Finding total sales by ID: {}", id);
 
         Store store = findStoreById(id);
-        StoreTotalSalesResponse storeTotalSalesResponse = orderClient.findTotalSalesByStoreId(id);
 
-        storeTotalSalesResponse.setId(store.getId());
-        storeTotalSalesResponse.setAddress(store.getAddress());
-        storeTotalSalesResponse.setName(store.getName());
+        StoreTotalSalesResponse storeTotalSalesResponse = orderClient.findTotalSalesByStoreId(id);
+        storeTotalSalesResponse.setStore(store);
 
         return storeTotalSalesResponse;
     }
