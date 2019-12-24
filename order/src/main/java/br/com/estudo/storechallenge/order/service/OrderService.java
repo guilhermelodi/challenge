@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,10 +65,15 @@ public class OrderService {
     public StoreTotalSalesResponse findTotalSalesByStoreId(Long storeId) {
         log.info("Calculating the total sales to store: {}", storeId);
 
+        DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
+
         StoreTotalSalesResponse storeTotalSalesResponse = StoreTotalSalesResponse.builder()
                 .storeId(storeId)
-                .totalDay(orderRepository.sumTotalSalesDayByStoreId(storeId).orElse(new BigDecimal("0")))
-                .totalMonth(orderRepository.sumTotalSalesMonthByStoreId(storeId).orElse(new BigDecimal("0")))
+                .totalDay(orderRepository.sumTotalSalesByStoreIdAndDay(storeId, LocalDate.now().format(dayFormatter))
+                        .orElse(new BigDecimal("0")))
+                .totalMonth(orderRepository.sumTotalSalesByStoreIdAndMonth(storeId, LocalDate.now().format(monthFormatter))
+                        .orElse(new BigDecimal("0")))
                 .build();
 
         return storeTotalSalesResponse;
