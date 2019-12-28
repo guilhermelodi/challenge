@@ -6,6 +6,7 @@ import br.com.estudo.storechallenge.order.repository.OrderRepository;
 import br.com.estudo.storechallenge.order.response.OrderResponse;
 import br.com.estudo.storechallenge.order.response.StoreResponse;
 import br.com.estudo.storechallenge.order.response.StoreTotalSalesResponse;
+import br.com.estudo.storechallenge.order.utils.ConversorDateUtil;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,14 +64,16 @@ public class OrderService {
     public StoreTotalSalesResponse findTotalSalesByStoreId(Long storeId) {
         log.info("Calculating the total sales to store: {}", storeId);
 
-        DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.withDayOfMonth(1);
+        LocalDate endDate = today.withDayOfMonth(today.lengthOfMonth());
 
         StoreTotalSalesResponse storeTotalSalesResponse = StoreTotalSalesResponse.builder()
                 .storeId(storeId)
-                .totalDay(orderRepository.sumTotalSalesByStoreIdAndDay(storeId, LocalDate.now().format(dayFormatter))
+                .totalDay(orderRepository.sumTotalSalesByStoreIdAndDay(storeId, ConversorDateUtil.convertToDate(today))
                         .orElse(new BigDecimal("0")))
-                .totalMonth(orderRepository.sumTotalSalesByStoreIdAndMonth(storeId, LocalDate.now().format(monthFormatter))
+                .totalMonth(orderRepository.sumTotalSalesByStoreIdAndIntervalDates(storeId,
+                            ConversorDateUtil.convertToDate(startDate), ConversorDateUtil.convertToDate(endDate))
                         .orElse(new BigDecimal("0")))
                 .build();
 

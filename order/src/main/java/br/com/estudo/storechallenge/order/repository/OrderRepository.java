@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -16,14 +15,14 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("SELECT SUM(oi.quantity * oi.unitPrice) " +
             " FROM OrderItem oi " +
-            " WHERE TO_CHAR(oi.order.creationDate, 'MM/YYYY') = :month " +
+            " WHERE date_trunc('day', oi.order.creationDate) BETWEEN :startDate AND :endDate " +
             "  AND oi.order.storeId = :storeId")
-    Optional<BigDecimal> sumTotalSalesByStoreIdAndMonth(Long storeId, String month);
+    Optional<BigDecimal> sumTotalSalesByStoreIdAndIntervalDates(Long storeId, Date startDate, Date endDate);
 
     @Query("SELECT SUM(oi.quantity * oi.unitPrice) " +
             " FROM OrderItem oi " +
-            " WHERE TO_CHAR(oi.order.creationDate, 'DD/MM/YYYY') = :day " +
+            " WHERE date_trunc('day', oi.order.creationDate) = :day " +
             "  AND oi.order.storeId = :storeId")
-    Optional<BigDecimal> sumTotalSalesByStoreIdAndDay(Long storeId, String day);
+    Optional<BigDecimal> sumTotalSalesByStoreIdAndDay(Long storeId, Date day);
 
 }

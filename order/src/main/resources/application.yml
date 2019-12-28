@@ -15,17 +15,16 @@ spring:
       maximumPoolSize: 5
   jpa:
     hibernate.ddl-auto: update #drop and create table again, good for testing, comment this in production
-    #show-sql: true
-    #properties.hibernate.format_sql: true
+    properties.hibernate.format_sql: true
   cache:
     jcache:
       config: classpath:ehcache.xml
 
 logging:
-#  level:
-#    org.hibernate:
-#      SQL: DEBUG
-#      type.descriptor.sql.BasicBinder: TRACE
+  level:
+    org.hibernate:
+      SQL: DEBUG
+      type.descriptor.sql.BasicBinder: TRACE
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [${spring.application.name:-},%X{X-B3-TraceId:-}] --- [%thread] %class{36}:%M:%L : %msg%n"
 
