@@ -1,6 +1,7 @@
 package br.com.estudo.storechallenge.order.controller;
 
 import br.com.estudo.storechallenge.order.response.OrderResponse;
+import br.com.estudo.storechallenge.order.response.StoreTotalSalesResponse;
 import br.com.estudo.storechallenge.order.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +32,12 @@ public class OrderController {
     @GetMapping(value = "users/{user}/orders", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OrderResponse>> findOrdersByUser(@PathVariable String user) {
         return new ResponseEntity<>(orderService.listOrdersByUser(user), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Gets total sales value per day and month of a store")
+    @GetMapping(value = "orders/stores/{storeId}/total-sales", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<StoreTotalSalesResponse> findTotalSalesByStoreId(@PathVariable Long storeId) {
+        return new ResponseEntity<>(orderService.findTotalSalesByStoreId(storeId), HttpStatus.OK);
     }
 
 }

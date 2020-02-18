@@ -1,9 +1,11 @@
 package br.com.estudo.storechallenge.store.service;
 
+import br.com.estudo.storechallenge.store.client.OrderClient;
 import br.com.estudo.storechallenge.store.entity.Store;
 import br.com.estudo.storechallenge.store.exception.StoreNotFoundException;
 import br.com.estudo.storechallenge.store.repository.StoreRepository;
 import br.com.estudo.storechallenge.store.request.StoreRequest;
+import br.com.estudo.storechallenge.store.response.StoreTotalSalesResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class StoreService {
 
     @Autowired
     private StoreRepository storeRepository;
+
+    @Autowired
+    private OrderClient orderClient;
 
     public List<Store> listAllStores() {
         log.info("Listing all stores");
@@ -53,5 +58,16 @@ public class StoreService {
         log.info("Deleting store by ID: {}", id);
 
         storeRepository.delete(findStoreById(id));
+    }
+
+    public StoreTotalSalesResponse findTotalSalesById(Long id) {
+        log.info("Finding total sales by ID: {}", id);
+
+        Store store = findStoreById(id);
+
+        StoreTotalSalesResponse storeTotalSalesResponse = orderClient.findTotalSalesByStoreId(id);
+        storeTotalSalesResponse.setStore(store);
+
+        return storeTotalSalesResponse;
     }
 }

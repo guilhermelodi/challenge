@@ -2,6 +2,7 @@ package br.com.estudo.storechallenge.store.controller;
 
 import br.com.estudo.storechallenge.store.entity.Store;
 import br.com.estudo.storechallenge.store.request.StoreRequest;
+import br.com.estudo.storechallenge.store.response.StoreTotalSalesResponse;
 import br.com.estudo.storechallenge.store.service.StoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,6 +37,14 @@ public class StoreController {
         Store store = storeService.findStoreById(id);
 
         return new ResponseEntity<>(store, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Gets one store with total sales in the day and month by id")
+    @GetMapping(value = "/{id}/total-sales", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<StoreTotalSalesResponse> findTotalSalesById(@PathVariable Long id) {
+        StoreTotalSalesResponse storeTotalSalesResponse = storeService.findTotalSalesById(id);
+
+        return new ResponseEntity<>(storeTotalSalesResponse, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Add a new store")
